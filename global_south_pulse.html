@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global South Pulse — May 24–26, 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f2ead8;
+    --panel: rgba(255,252,244,0.96);
+    --text: #2c1f0e;
+    --text-muted: #7a6248;
+    --accent: #7a4a1e;
+    --border: rgba(122,74,30,0.18);
+    --climate: #266040;
+    --finance: #1e4898;
+    --conflict: #b02828;
+    --indigenous: #5a3090;
+    --tech: #1a6860;
+    --elections: #a07808;
+    --minerals: #b05018;
+    --diplomacy: #7a4a1e;
+    --font: 'SF Mono', 'Fira Code', 'Fira Mono', 'Cascadia Code', monospace;
+  }
+
+  html { scroll-behavior: auto; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    line-height: 1.6;
+    padding-top: 80px;
+  }
+
+  /* TOP BAR */
+  #topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: 44px;
+    background: var(--accent);
+    color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 2px solid rgba(255,255,255,0.15);
+  }
+  #topbar .brand { font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  #topbar .dateline { font-size: 11px; opacity: 0.8; margin: 0 16px; }
+  #topbar .pills { display: flex; gap: 8px; }
+  .pill {
+    background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px; padding: 2px 10px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap;
+  }
+  .pill.live { background: rgba(176,40,40,0.6); }
+
+  /* NAV BAR */
+  #navbar {
+    position: fixed; top: 44px; left: 0; right: 0; z-index: 999;
+    height: 36px;
+    background: rgba(242,234,216,0.97);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 20px; gap: 4px;
+    backdrop-filter: blur(4px);
+  }
+  .nav-btn {
+    background: none; border: 1px solid transparent; cursor: pointer;
+    font-family: var(--font); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted);
+    padding: 4px 12px; border-radius: 3px; transition: all 0.15s;
+  }
+  .nav-btn:hover { color: var(--accent); border-color: var(--border); }
+  .nav-btn.active { color: var(--accent); border-color: var(--accent); background: rgba(122,74,30,0.07); }
+
+  /* MAIN */
+  main { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    margin: 32px 0 16px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-header h2 {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .section-header .count {
+    font-size: 10px; color: var(--text-muted); background: var(--border);
+    padding: 1px 7px; border-radius: 10px;
+  }
+
+  /* TOP STORY */
+  #top-story-section {
+    background: var(--panel);
+    border-left: 4px solid var(--conflict);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(44,31,14,0.08);
+  }
+  .top-story-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--conflict);
+    margin-bottom: 12px;
+  }
+  .pulse-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--conflict);
+    animation: pulse-red 1.4s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse-red {
+    0%,100% { box-shadow: 0 0 0 0 rgba(176,40,40,0.7); }
+    60% { box-shadow: 0 0 0 6px rgba(176,40,40,0); }
+  }
+  .score-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .chip {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 3px 8px; border-radius: 3px;
+    border: 1px solid currentColor;
+  }
+  .chip.hit { color: #fff; }
+  .chip.miss { color: #bbb; border-color: #ccc; background: transparent; }
+  .top-story-headline {
+    font-size: 20px; font-weight: 800; line-height: 1.3;
+    color: var(--text); margin-bottom: 14px;
+  }
+  .top-story-body p {
+    font-size: 13px; line-height: 1.7; color: var(--text);
+    margin-bottom: 12px;
+  }
+  .why-won {
+    border-left: 3px solid var(--conflict);
+    background: rgba(176,40,40,0.05);
+    padding: 10px 14px; margin: 14px 0;
+    font-style: italic; font-size: 12px; color: var(--text-muted);
+    border-radius: 0 4px 4px 0;
+  }
+  .data-strip {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+    margin: 16px 0;
+  }
+  .data-box {
+    border: 1px solid var(--border); border-radius: 4px;
+    padding: 8px 10px; text-align: center;
+    background: rgba(242,234,216,0.5);
+  }
+  .data-box .dval { font-size: 16px; font-weight: 800; color: var(--conflict); display: block; }
+  .data-box .dlbl { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .connects-row {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin: 12px 0; font-size: 11px;
+  }
+  .connects-row .label { font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 10px; letter-spacing: 0.06em; }
+  .connect-tag {
+    display: flex; align-items: center; gap: 5px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 3px; padding: 2px 8px;
+  }
+  .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .source-links { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .src-link {
+    font-size: 10px; color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid var(--accent); opacity: 0.8;
+  }
+  .src-link:hover { opacity: 1; }
+
+  /* HERO GRID */
+  #hero { display: grid; grid-template-columns: 1fr 350px; gap: 16px; margin-bottom: 8px; }
+
+  /* Signals panel */
+  #signals-panel {
+    background: var(--panel); border-radius: 6px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .panel-header {
+    padding: 10px 14px; background: rgba(122,74,30,0.07);
+    border-bottom: 1px solid var(--border);
+    font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+  }
+  .signals-scroll { max-height: 560px; overflow-y: auto; padding: 10px; }
+  .region-group { margin-bottom: 14px; }
+  .region-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); padding: 4px 6px; margin-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .signal-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 7px 8px; border-radius: 4px; margin-bottom: 4px;
+    transition: background 0.1s;
+  }
+  .signal-item:hover { background: rgba(122,74,30,0.05); }
+  .signal-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    margin-top: 4px; animation: signal-pulse 2.5s infinite;
+  }
+  @keyframes signal-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .signal-body { flex: 1; min-width: 0; }
+  .signal-country { font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1px; }
+  .signal-hl { font-size: 12px; font-weight: 700; line-height: 1.3; margin-bottom: 2px; }
+  .signal-sub { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
+  .sig-badge {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.04em; padding: 1px 6px;
+    border-radius: 2px; flex-shrink: 0; margin-top: 2px; text-transform: uppercase;
+  }
+  .badge-high { background: rgba(176,40,40,0.12); color: var(--conflict); }
+  .badge-med { background: rgba(160,120,8,0.12); color: var(--elections); }
+
+  /* Toplines panel */
+  #toplines-panel {
+    background: var(--panel); border-radius: 6px;
+    border: 1px solid var(--border); overflow: hidden;
+  }
+  .topline-item {
+    padding: 12px 14px; border-bottom: 1px solid var(--border);
+    display: flex; gap: 10px;
+  }
+  .topline-item:last-child { border-bottom: none; }
+  .tl-num { font-size: 22px; font-weight: 800; color: rgba(122,74,30,0.2); line-height: 1; flex-shrink: 0; width: 24px; text-align: right; }
+  .tl-body { flex: 1; }
+  .tl-hl { font-size: 12px; font-weight: 800; line-height: 1.3; margin-bottom: 4px; }
+  .tl-text { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 5px; }
+  .theme-tag {
+    display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase; padding: 1px 7px; border-radius: 2px; color: #fff;
+    margin-right: 4px;
+  }
+
+  /* FILTER BAR */
+  .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .filter-btn {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 3px; padding: 4px 10px; cursor: pointer;
+    font-family: var(--font); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* CARDS GRID */
+  #cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 14px;
+  }
+  .intel-card {
+    background: var(--panel); border-radius: 6px;
+    border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    padding: 14px 16px;
+    transition: box-shadow 0.15s;
+  }
+  .intel-card:hover { box-shadow: 0 4px 16px rgba(44,31,14,0.1); }
+  .intel-card.hidden { display: none; }
+  .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .card-country { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .card-relevance { font-size: 9px; font-weight: 700; padding: 1px 7px; border-radius: 2px; text-transform: uppercase; }
+  .rel-high { background: rgba(176,40,40,0.12); color: var(--conflict); }
+  .rel-med { background: rgba(160,120,8,0.12); color: var(--elections); }
+  .card-hl { font-size: 14px; font-weight: 800; line-height: 1.3; margin-bottom: 8px; }
+  .card-summary { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+  .why-matters {
+    background: rgba(122,74,30,0.06); border-radius: 4px; padding: 8px 10px; margin-bottom: 10px;
+  }
+  .why-matters .wm-label { font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+  .why-matters p { font-size: 11px; line-height: 1.5; color: var(--text); }
+  .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+  .card-src { font-size: 10px; }
+  .card-src a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(122,74,30,0.3); }
+  .card-src a:hover { border-color: var(--accent); }
+
+  /* REPORTS */
+  #reports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .report-card { background: var(--panel); border-radius: 6px; border: 1px solid var(--border); padding: 14px 16px; }
+  .report-inst { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .report-title { font-size: 13px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; }
+  .report-insight { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px; }
+  .report-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .meta-tag { font-size: 9px; color: var(--text-muted); background: rgba(122,74,30,0.07); border-radius: 2px; padding: 1px 6px; }
+
+  /* PATTERNS */
+  #patterns-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .pattern-block {
+    background: var(--panel); border-radius: 6px; border: 1px solid var(--border);
+    padding: 16px 18px; position: relative; overflow: hidden;
+  }
+  .pattern-num {
+    position: absolute; top: -8px; right: 10px;
+    font-size: 72px; font-weight: 800; color: rgba(122,74,30,0.07);
+    line-height: 1; pointer-events: none;
+  }
+  .pattern-label { font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .pattern-title { font-size: 14px; font-weight: 800; line-height: 1.3; margin-bottom: 8px; }
+  .pattern-body { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
+  .country-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+  .country-chip { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; padding: 2px 7px; border: 1px solid var(--border); border-radius: 3px; color: var(--text-muted); background: rgba(242,234,216,0.7); }
+
+  /* SOURCE ARCHIVE */
+  #sources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  .source-group-card { background: var(--panel); border-radius: 6px; border: 1px solid var(--border); padding: 14px 16px; }
+  .source-group-title { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .source-row { display: grid; grid-template-columns: 1fr auto; gap: 6px; padding: 4px 0; border-bottom: 1px solid rgba(122,74,30,0.07); align-items: start; }
+  .source-row:last-child { border-bottom: none; }
+  .source-name { font-size: 11px; font-weight: 600; }
+  .source-name a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+  .source-name a:hover { color: var(--accent); }
+  .source-meta-col { text-align: right; }
+  .source-date { font-size: 9px; color: var(--text-muted); }
+  .source-type { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); background: rgba(122,74,30,0.07); padding: 1px 5px; border-radius: 2px; }
+
+  /* FOOTER */
+  footer { margin-top: 40px; padding: 20px; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 10px; }
+  footer .footer-brand { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+
+  /* SCROLLBAR */
+  .signals-scroll::-webkit-scrollbar { width: 4px; }
+  .signals-scroll::-webkit-scrollbar-track { background: transparent; }
+  .signals-scroll::-webkit-scrollbar-thumb { background: rgba(122,74,30,0.2); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <div class="brand">&#x2B21; Global South Pulse</div>
+  <div class="dateline">Intelligence scan &middot; May 24&ndash;26, 2026</div>
+  <div class="pills">
+    <span class="pill live">&#9679; Live</span>
+    <span class="pill">18 Signals</span>
+    <span class="pill">9 Cards</span>
+    <span class="pill">24 Countries</span>
+  </div>
+</div>
+
+<!-- NAV BAR -->
+<div id="navbar">
+  <button class="nav-btn active" onclick="navTo('overview')">Overview</button>
+  <button class="nav-btn" onclick="navTo('intelligence')">Intelligence</button>
+  <button class="nav-btn" onclick="navTo('reports')">Reports</button>
+  <button class="nav-btn" onclick="navTo('patterns')">Patterns</button>
+  <button class="nav-btn" onclick="navTo('sources')">Sources</button>
+</div>
+
+<main>
+
+<!-- TOP STORY -->
+<section id="overview">
+  <div id="top-story-section">
+    <div class="top-story-label">
+      <span class="pulse-dot"></span>
+      Top Story of the Moment &mdash; Score 5/5
+    </div>
+
+    <div class="score-chips">
+      <span class="chip hit" style="background:var(--conflict)">&#10003; Cross-source density</span>
+      <span class="chip hit" style="background:var(--conflict)">&#10003; Cascading reach</span>
+      <span class="chip hit" style="background:var(--conflict)">&#10003; Temporal urgency</span>
+      <span class="chip hit" style="background:var(--conflict)">&#10003; Structural consequence</span>
+      <span class="chip hit" style="background:var(--conflict)">&#10003; Geographic multiplier</span>
+    </div>
+
+    <div class="top-story-headline">
+      The Strait of Hormuz Is Closed &mdash; And the Global South Is Paying the Price
+    </div>
+
+    <div class="top-story-body">
+      <p>Since February 28, 2026, the Strait of Hormuz &mdash; through which roughly 20% of global oil and gas passes &mdash; has been effectively closed following the US&ndash;Israel air campaign against Iran and the assassination of Supreme Leader Khamenei. Iran&rsquo;s Revolutionary Guard Corps responded with a maritime blockade, mining operations, and attacks on merchant shipping. The US counter-blockade of Iranian ports, launched April 13, and the subsequent Operation Project Freedom (a US Navy merchant escort mission) escalated the crisis further before Trump paused the operation on May 6, citing &ldquo;great progress&rdquo; toward an agreement. That agreement has not materialized. The closure is now entering its 13th week.</p>
+      <p>The consequences for the Global South are severe and asymmetric. Nearly 84% of Gulf crude and 83% of LNG transiting the Strait was destined for Asia &mdash; roughly 70% to China, India, Japan, and South Korea. Pakistan and Bangladesh are among the hardest-hit economies, facing fuel shortages, inflation spikes, and GDP contraction. The crisis has given fresh urgency to the debate within BRICS about energy supply diversification and has handed India &mdash; as BRICS chair hosting the September summit &mdash; an unusually complex diplomatic opening: to broker between its strategic autonomy, its energy dependency, and its aspirations to lead Global South climate finance architecture simultaneously. The Iran crisis is not a sideshow to Global South geopolitics in 2026 &mdash; it is the central forcing function.</p>
+
+      <div class="why-won">
+        <em>Why this story scored 5/5:</em> It is the only story in this scan simultaneously active in its effects, cited as context across every other major storyline (BRICS, South Asia, SE Asia, energy transition, development finance), that disrupts a structural pattern built over decades (Asia&rsquo;s Gulf energy dependency), and touches every inhabited region of the Global South in real-time.
+      </div>
+
+      <div class="data-strip">
+        <div class="data-box"><span class="dval">20%</span><span class="dlbl">Global oil supply disrupted</span></div>
+        <div class="data-box"><span class="dval">13 wk</span><span class="dlbl">Blockade duration (May 26)</span></div>
+        <div class="data-box"><span class="dval">84%</span><span class="dlbl">Gulf crude shipped to Asia</span></div>
+        <div class="data-box"><span class="dval">2</span><span class="dlbl">US operations launched &amp; paused</span></div>
+        <div class="data-box"><span class="dval">BGD+PAK</span><span class="dlbl">Worst-hit Global South economies</span></div>
+      </div>
+
+      <div class="connects-row">
+        <span class="label">Connects to &rarr;</span>
+        <span class="connect-tag"><span class="cdot" style="background:var(--diplomacy)"></span>BRICS FM Meeting (Iran shadow)</span>
+        <span class="connect-tag"><span class="cdot" style="background:var(--finance)"></span>Bangladesh/Pakistan GDP risk</span>
+        <span class="connect-tag"><span class="cdot" style="background:var(--diplomacy)"></span>SE Asia pivot toward China</span>
+        <span class="connect-tag"><span class="cdot" style="background:var(--climate)"></span>Energy transition disruption</span>
+        <span class="connect-tag"><span class="cdot" style="background:var(--finance)"></span>Development finance gap widening</span>
+        <span class="connect-tag"><span class="cdot" style="background:var(--conflict)"></span>Gulf states multi-alignment</span>
+      </div>
+
+      <div class="source-links">
+        <a class="src-link" href="https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis" target="_blank">Wikipedia: 2026 Hormuz Crisis</a>
+        <a class="src-link" href="https://www.britannica.com/event/2026-Iran-war" target="_blank">Britannica: 2026 Iran War</a>
+        <a class="src-link" href="https://www.aljazeera.com/news/2026/5/14/iran-war-why-the-brics-foreign-ministers-meeting-in-india-matters" target="_blank">Al Jazeera: BRICS &amp; Iran</a>
+        <a class="src-link" href="https://foreignpolicy.com/2026/05/06/iran-war-southeast-asia-philippines-vietnam-indonesia-china-united-states-geopolitics-economics/" target="_blank">Foreign Policy: SE Asia pivot</a>
+        <a class="src-link" href="https://www.dallasfed.org/research/economics/2026/0320" target="_blank">Dallas Fed: Hormuz economics</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO GRID -->
+  <div id="hero">
+
+    <!-- ACTIVE SIGNALS -->
+    <div id="signals-panel">
+      <div class="panel-header">&#9685; Active Signals &mdash; 18 tracked</div>
+      <div class="signals-scroll">
+
+        <div class="region-group">
+          <div class="region-label">Latin America</div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--climate)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Brazil</div>
+              <div class="signal-hl">Lula commits $617.5M to Amazon ecological investment</div>
+              <div class="signal-sub">Eco Invest program &mdash; sustainable tourism, bioeconomy, infrastructure &middot; May 25</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--climate)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Brazil</div>
+              <div class="signal-hl">Amazon deforestation hits 8-year low &mdash; 50% cut since 2022 peak</div>
+              <div class="signal-sub">On track for lowest rate since records began in 1988 &middot; May 14</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--elections)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Brazil</div>
+              <div class="signal-hl">Lula in Amazonas: Amazon becomes 2026 election terrain</div>
+              <div class="signal-sub">Presidential visit May 25&ndash;26 &mdash; Omar Aziz backed for governor</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--climate)"></div>
+            <div class="signal-body">
+              <div class="signal-country">LAC Region</div>
+              <div class="signal-hl">WMO coins &ldquo;hydrological whiplash&rdquo; &mdash; floods &amp; drought as new normal</div>
+              <div class="signal-sub">State of Climate in LAC 2025 launched May 18 &middot; record heat, glaciers, cyclones</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--elections)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Argentina</div>
+              <div class="signal-hl">Milei&rsquo;s Trump alignment drawing domestic opposition pressure</div>
+              <div class="signal-sub">Maritime sovereignty debate; far-right bloc fracturing on geopolitics</div>
+            </div>
+            <span class="sig-badge badge-med">Med</span>
+          </div>
+        </div>
+
+        <div class="region-group">
+          <div class="region-label">Africa</div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--minerals)"></div>
+            <div class="signal-body">
+              <div class="signal-country">DRC</div>
+              <div class="signal-hl">90 mining titles revoked; comprehensive export audit mandated</div>
+              <div class="signal-sub">Tshisekedi directive April 25 &mdash; &ldquo;most ambitious mineral sovereignty move in decades&rdquo;</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--minerals)"></div>
+            <div class="signal-body">
+              <div class="signal-country">DRC</div>
+              <div class="signal-hl">Cobalt export quotas at half 2024 output &mdash; Asian markets uncertain</div>
+              <div class="signal-sub">96,600 MT annual quota for 2026&ndash;27; EV battery supply chains exposed</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--finance)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Sub-Saharan Africa</div>
+              <div class="signal-hl">22 countries in or at high risk of debt distress</div>
+              <div class="signal-sub">Sovereign-bank nexus growing fastest in low-income SSA &middot; World Bank</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--minerals)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Zambia</div>
+              <div class="signal-hl">Local-sourcing legislation mandating 20% Zambian procurement in force</div>
+              <div class="signal-sub">Effective Jan 1 2026 &mdash; value chain retention model for region</div>
+            </div>
+            <span class="sig-badge badge-med">Med</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--finance)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Kenya</div>
+              <div class="signal-hl">98.2% duty-free access deal with China enters force</div>
+              <div class="signal-sub">Jan 2026 early harvest arrangement &mdash; South-South trade rebalancing</div>
+            </div>
+            <span class="sig-badge badge-med">Med</span>
+          </div>
+        </div>
+
+        <div class="region-group">
+          <div class="region-label">MENA</div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--conflict)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Iran / Gulf</div>
+              <div class="signal-hl">Hormuz blockade week 13 &mdash; 20% of global oil still disrupted</div>
+              <div class="signal-sub">Operation Project Freedom paused May 6; negotiations stalled</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--diplomacy)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Gulf States</div>
+              <div class="signal-hl">Multi-alignment deepens: US security partner + China economic ties</div>
+              <div class="signal-sub">Saudi Arabia, UAE inside BRICS while maintaining US defense framework</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+        </div>
+
+        <div class="region-group">
+          <div class="region-label">South Asia</div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--diplomacy)"></div>
+            <div class="signal-body">
+              <div class="signal-country">India</div>
+              <div class="signal-hl">BRICS chairmanship: Sept 12&ndash;13 summit &mdash; climate finance at center</div>
+              <div class="signal-sub">FM meeting May 14&ndash;15 concluded; reshaping Global South architecture</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--climate)"></div>
+            <div class="signal-body">
+              <div class="signal-country">India / Pakistan</div>
+              <div class="signal-hl">46&deg;C+ heatwave &mdash; climate change triples probability of this severity</div>
+              <div class="signal-sub">Deaths in Karachi + India; Mongabay attribution study &middot; May 2026</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--finance)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Bangladesh</div>
+              <div class="signal-hl">Worst-hit Global South economy from Hormuz fuel crisis</div>
+              <div class="signal-sub">Recession-like GDP conditions projected; fuel shortages acute</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+        </div>
+
+        <div class="region-group">
+          <div class="region-label">SE Asia &amp; Pacific</div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--diplomacy)"></div>
+            <div class="signal-body">
+              <div class="signal-country">SE Asia</div>
+              <div class="signal-hl">Iran war &ldquo;pushing SE Asia into China&rsquo;s arms&rdquo;</div>
+              <div class="signal-sub">US alliance reliability questioned; Vietnam&ndash;China 32 agreements signed</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--climate)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Pacific Islands</div>
+              <div class="signal-hl">Climate Justice &amp; Sea Level Rise Week &mdash; Suva, Fiji &middot; TODAY</div>
+              <div class="signal-sub">Pacific Resilience Facility entered force May 6; COP31 prep accelerating</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--elections)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Indonesia</div>
+              <div class="signal-hl">Prabowo politically dominant but grip weakening &mdash; 5th protest wave</div>
+              <div class="signal-sub">Economic slowdown + governance failures driving civil unrest</div>
+            </div>
+            <span class="sig-badge badge-med">Med</span>
+          </div>
+        </div>
+
+        <div class="region-group">
+          <div class="region-label">Global</div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--indigenous)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Global</div>
+              <div class="signal-hl">Less than 1% of climate finance reaches Indigenous peoples</div>
+              <div class="signal-sub">OHCHR call for inputs on land titling; UNPFII advocacy escalating &middot; May 2026</div>
+            </div>
+            <span class="sig-badge badge-high">High</span>
+          </div>
+
+          <div class="signal-item">
+            <div class="signal-dot" style="background:var(--tech)"></div>
+            <div class="signal-body">
+              <div class="signal-country">Global South</div>
+              <div class="signal-hl">&ldquo;Data colonialism&rdquo; framing takes hold in AI sovereignty debate</div>
+              <div class="signal-sub">India, Brazil, South Africa investing in state-funded foundational AI models</div>
+            </div>
+            <span class="sig-badge badge-med">Med</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- EXECUTIVE TOPLINES -->
+    <div id="toplines-panel">
+      <div class="panel-header">&#9650; Executive Toplines &mdash; 7 stories</div>
+
+      <div class="topline-item">
+        <div class="tl-num">1</div>
+        <div class="tl-body">
+          <div class="tl-hl">Strait of Hormuz blockade enters week 13</div>
+          <div class="tl-text">US&ndash;Israel&ndash;Iran crisis has disrupted 20% of global oil. Operation Project Freedom paused. Bangladesh and Pakistan in economic crisis. Global energy architecture under stress.</div>
+          <span class="theme-tag" style="background:var(--conflict)">Conflict</span>
+          <span class="theme-tag" style="background:var(--finance)">Finance</span>
+        </div>
+      </div>
+
+      <div class="topline-item">
+        <div class="tl-num">2</div>
+        <div class="tl-body">
+          <div class="tl-hl">BRICS India chairmanship navigates Iran, climate, AI governance</div>
+          <div class="tl-text">FM meeting May 14&ndash;15 concluded. Sept 12&ndash;13 New Delhi summit set. India attempting to build Global South climate finance consensus while managing Iran shadow.</div>
+          <span class="theme-tag" style="background:var(--diplomacy)">Diplomacy</span>
+          <span class="theme-tag" style="background:var(--climate)">Climate</span>
+        </div>
+      </div>
+
+      <div class="topline-item">
+        <div class="tl-num">3</div>
+        <div class="tl-body">
+          <div class="tl-hl">DRC asserts mineral sovereignty &mdash; audits, quotas, revocations</div>
+          <div class="tl-text">90 mining titles revoked; cobalt export quotas at half 2024 output; comprehensive audit mandated. Africa Is a Country: &ldquo;the new scramble for Congo.&rdquo;</div>
+          <span class="theme-tag" style="background:var(--minerals)">Minerals</span>
+          <span class="theme-tag" style="background:var(--finance)">Finance</span>
+        </div>
+      </div>
+
+      <div class="topline-item">
+        <div class="tl-num">4</div>
+        <div class="tl-body">
+          <div class="tl-hl">Brazil: Amazon at 8-year low + $617.5M investment, 2026 elections shadow</div>
+          <div class="tl-text">Record-low deforestation and new Eco Invest program announced May 25. But Lula&rsquo;s Amazonas visit is simultaneously ecological and electoral.</div>
+          <span class="theme-tag" style="background:var(--climate)">Climate</span>
+          <span class="theme-tag" style="background:var(--elections)">Elections</span>
+        </div>
+      </div>
+
+      <div class="topline-item">
+        <div class="tl-num">5</div>
+        <div class="tl-body">
+          <div class="tl-hl">Pacific pushes climate justice as PRF enters force &mdash; COP31 countdown</div>
+          <div class="tl-text">Pacific Climate Justice Week underway in Suva today. Pacific Resilience Facility entered force May 6. Sea level rise described as &ldquo;irreversible&rdquo; for Tuvalu, Kiribati, Fiji.</div>
+          <span class="theme-tag" style="background:var(--climate)">Climate</span>
+          <span class="theme-tag" style="background:var(--finance)">Finance</span>
+        </div>
+      </div>
+
+      <div class="topline-item">
+        <div class="tl-num">6</div>
+        <div class="tl-body">
+          <div class="tl-hl">Africa debt distress: 22 countries at high risk, sovereign-bank nexus accelerating</div>
+          <div class="tl-text">Debt service risen to 43% of budget revenue. Egypt holds $7.25B SDR in IMF credit. Net capital flows to EMDEs turned negative.</div>
+          <span class="theme-tag" style="background:var(--finance)">Finance</span>
+        </div>
+      </div>
+
+      <div class="topline-item">
+        <div class="tl-num">7</div>
+        <div class="tl-body">
+          <div class="tl-hl">Global South AI: &ldquo;Data colonialism&rdquo; framing supplants &ldquo;digital divide&rdquo;</div>
+          <div class="tl-text">India, Brazil, South Africa investing in state-funded AI models. Carnegie: &ldquo;South-South AI: Practical Pathways&rdquo; published Feb 2026. BRICS AI governance on Sept agenda.</div>
+          <span class="theme-tag" style="background:var(--tech)">Tech</span>
+          <span class="theme-tag" style="background:var(--diplomacy)">Diplomacy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INTELLIGENCE CARDS -->
+<section id="intelligence">
+  <div class="section-header">
+    <h2>Intelligence Cards</h2>
+    <span class="count">9 cards</span>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCards('latin-america', this)">Latin America</button>
+    <button class="filter-btn" onclick="filterCards('africa', this)">Africa</button>
+    <button class="filter-btn" onclick="filterCards('mena', this)">MENA</button>
+    <button class="filter-btn" onclick="filterCards('south-asia', this)">South Asia</button>
+    <button class="filter-btn" onclick="filterCards('southeast-asia', this)">SE Asia</button>
+    <button class="filter-btn" onclick="filterCards('pacific', this)">Pacific</button>
+    <button class="filter-btn" onclick="filterCards('climate', this)">Climate</button>
+    <button class="filter-btn" onclick="filterCards('finance', this)">Finance</button>
+    <button class="filter-btn" onclick="filterCards('conflict', this)">Conflict</button>
+    <button class="filter-btn" onclick="filterCards('minerals', this)">Minerals</button>
+    <button class="filter-btn" onclick="filterCards('indigenous', this)">Indigenous</button>
+    <button class="filter-btn" onclick="filterCards('diplomacy', this)">Diplomacy</button>
+  </div>
+
+  <div id="cards-grid">
+
+    <div class="intel-card" style="border-left-color:var(--minerals)"
+         data-regions="africa" data-themes="minerals finance diplomacy">
+      <div class="card-top">
+        <span class="card-country">DRC &middot; Congo</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">Mineral Sovereignty Offensive: Cobalt Quotas, Audits, and 90 Revoked Mining Titles</div>
+      <div class="card-summary">President Tshisekedi&rsquo;s April 25 cabinet directive mandated a comprehensive audit of all mining exports, targeting revenue leakage. CAMI (Mining Cadastre) revoked 90 titles covering 12,767 km&sup2; across five provinces. Cobalt export quotas for 2026&ndash;27 are set at 96,600 MT annually &mdash; less than half 2024 output &mdash; creating ripple effects across Asian EV battery supply chains.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>This is the most assertive mineral governance move by any African state in decades. It establishes a precedent: resource states can unilaterally restructure supply chains that Western and Chinese EV manufacturers had assumed were secured. If enforcement holds, it could template Zambia, Zimbabwe, and Namibia. If it collapses under capital flight, it will entrench the argument that sovereignty is performative without institutional capacity to back it.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--minerals)">Minerals</span>
+        <span class="theme-tag" style="background:var(--finance)">Finance</span>
+        <span class="theme-tag" style="background:var(--diplomacy)">Sovereignty</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://africasacountry.com/2026/05/the-new-scramble-for-congo" target="_blank">Africa Is a Country</a> &middot; <a href="https://discoveryalert.com.au/drc-copper-cobalt-export-revenues-probe-audit-2026-leakage/" target="_blank">Discovery Alert</a> &middot; <a href="https://www.spglobal.com/energy/en/news-research/latest-news/metals/122225-commodties-2026-cobalt-supply-delays-from-drc-spark-uncertainty-in-asian-european-markets" target="_blank">S&amp;P Global</a></div>
+    </div>
+
+    <div class="intel-card" style="border-left-color:var(--climate)"
+         data-regions="latin-america" data-themes="climate elections finance">
+      <div class="card-top">
+        <span class="card-country">Brazil</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">Amazon at Historic Low &mdash; But 2026 Elections Put It Back at Risk</div>
+      <div class="card-summary">Deforestation in the Legal Amazon dropped to its lowest level since 2014, confirming a 50% reduction since Lula took office. The government committed R$3.1 billion ($617.5M) to the Eco Invest program on May 25, targeting bioeconomy, sustainable tourism, and Amazon infrastructure. Lula&rsquo;s same-day visit to Manaus was simultaneously ecological and electoral &mdash; positioning Omar Aziz for the Amazonas governorship with Amazon stewardship as the political brand.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>Brazil&rsquo;s Amazon trajectory is one of the most consequential climate governance stories on the planet. The numbers are real and the trend is meaningful. But current polls show Lula in a tight race, and a more agriculture-friendly Congress is possible. The Eco Invest announcement signals that the Lula government understands Amazon success as a political asset to be actively managed, not merely a policy outcome. The risk is that this becomes campaign material before it becomes durable institutional architecture.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--climate)">Climate</span>
+        <span class="theme-tag" style="background:var(--elections)">Elections</span>
+        <span class="theme-tag" style="background:var(--finance)">Finance</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://www.washingtontimes.com/news/2026/may/25/government-brazil-commits-6175m-amazon-ecological-investment/" target="_blank">Washington Times</a> &middot; <a href="https://www.washingtonpost.com/world/2026/05/08/brazil-amazon-rainforest-wildfires-el-nino/30770546-4ade-11f1-a119-857cd2bf4fd4_story.html" target="_blank">Washington Post</a> &middot; <a href="https://news.mongabay.com/2025/12/the-amazon-in-2026-a-challenging-year-ahead-now-off-the-center-stage/" target="_blank">Mongabay</a></div>
+    </div>
+
+    <div class="intel-card" style="border-left-color:var(--diplomacy)"
+         data-regions="south-asia" data-themes="diplomacy climate finance">
+      <div class="card-top">
+        <span class="card-country">India &middot; BRICS Chair</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">India&rsquo;s BRICS Moment: Climate Finance Architecture Under an Iran Shadow</div>
+      <div class="card-summary">India&rsquo;s BRICS Foreign Ministers meeting (May 14&ndash;15) concluded with five agenda files: AI governance, reformed multilateralism, climate finance, expansion protocols, and the Iran&ndash;Israel response. The Strait of Hormuz blockade dominated informal sessions. The September 12&ndash;13 New Delhi summit carries the weight of building on Brazil&rsquo;s 2025 Framework Declaration on Climate Finance, but India&rsquo;s diplomatic bandwidth is stretched.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>India cannot condemn Iran without damaging BRICS cohesion (Iran is a member), cannot fully support Iran without fracturing its US alignment, and cannot ignore the crisis while trying to build a climate finance consensus that requires Western institutional buy-in. How Modi navigates September will signal whether BRICS can be a genuine architecture-shifting body or remains a platform for rhetorical solidarity.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--diplomacy)">Diplomacy</span>
+        <span class="theme-tag" style="background:var(--climate)">Climate</span>
+        <span class="theme-tag" style="background:var(--finance)">Finance</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://thediplomat.com/2026/05/the-brics-climate-stress-test-indias-opportunity-to-reshape-global-climate-finance-architecture/" target="_blank">The Diplomat</a> &middot; <a href="https://www.aljazeera.com/news/2026/5/14/iran-war-why-the-brics-foreign-ministers-meeting-in-india-matters" target="_blank">Al Jazeera</a> &middot; <a href="https://www.mea.gov.in/press-releases.htm?dtl%2F41130%2FBRICS+Foreign+Ministers+Meeting+Under+Indias+Chairship+May+1415+2026=" target="_blank">MEA India</a></div>
+    </div>
+
+    <div class="intel-card" style="border-left-color:var(--conflict)"
+         data-regions="south-asia" data-themes="conflict finance climate">
+      <div class="card-top">
+        <span class="card-country">Bangladesh</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">Hormuz Worst-Hit: GDP Contraction, Fuel Crisis, and a Climate Debt Trap</div>
+      <div class="card-summary">Bangladesh has been identified as one of the most severely impacted Global South economies from the Strait of Hormuz fuel crisis, with recession-like GDP conditions projected. The country simultaneously faces climate-intensified cyclones, rising sea levels, and a pre-existing debt burden. Bangladesh contributed negligibly to global emissions yet is absorbing consequences of decisions made in Washington, Tehran, and Tel Aviv.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>Bangladesh is a paradigm case for the cruel intersection of multiple, mutually reinforcing crises: climate vulnerability, energy import dependency, and limited fiscal space. This is the political argument for climate reparations and loss &amp; damage in its most concrete form &mdash; a country that did not cause the problem, holds no leverage in the geopolitical dynamics producing it, and is paying the price.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--conflict)">Conflict</span>
+        <span class="theme-tag" style="background:var(--finance)">Finance</span>
+        <span class="theme-tag" style="background:var(--climate)">Climate</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://en.wikipedia.org/wiki/2026_Iran_war_fuel_crisis" target="_blank">Wikipedia: Fuel Crisis</a> &middot; <a href="https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis" target="_blank">Wikipedia: Hormuz</a></div>
+    </div>
+
+    <div class="intel-card" style="border-left-color:var(--climate)"
+         data-regions="pacific" data-themes="climate finance diplomacy">
+      <div class="card-top">
+        <span class="card-country">Pacific Islands (Fiji, Tuvalu, Kiribati)</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">Pacific Climate Justice Week Opens in Suva &mdash; PRF Enters Force, COP31 Countdown</div>
+      <div class="card-summary">Pacific leaders gathered today (May 26) at the Pacific Islands Forum Secretariat in Suva for the Pacific Climate Justice and Sea Level Rise Week, ahead of Pre-COP and COP31 in Australia. The Pacific Resilience Facility (PRF) entered into force May 6, filling gaps in global climate finance for small island states. NASA confirmed irreversible sea level rise of at least 15cm for Tuvalu, Kiribati, and Fiji regardless of future emissions pathways.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>COP31 is in Australia &mdash; giving Pacific Island states unusual proximity and leverage to the host. &ldquo;Irreversible&rdquo; sea level rise language from NASA forces a shift toward planned relocation, compensation, and sovereignty protections that the current global climate architecture is entirely unprepared to deliver. This will be the sharpest political edge at COP31.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--climate)">Climate</span>
+        <span class="theme-tag" style="background:var(--finance)">Finance</span>
+        <span class="theme-tag" style="background:var(--diplomacy)">Diplomacy</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://pina.com.fj/2026/05/26/pacific-leaders-push-climate-justice-and-sea-level-rise-action/" target="_blank">PINA (today)</a> &middot; <a href="https://www.lowyinstitute.org/the-interpreter/pacific-where-climate-leadership-will-be-made-or-lost" target="_blank">Lowy Institute</a> &middot; <a href="https://www.jpl.nasa.gov/news/nasa-analysis-shows-irreversible-sea-level-rise-for-pacific-islands/" target="_blank">NASA JPL</a></div>
+    </div>
+
+    <div class="intel-card" style="border-left-color:var(--diplomacy)"
+         data-regions="mena" data-themes="diplomacy conflict finance">
+      <div class="card-top">
+        <span class="card-country">Gulf States (Saudi Arabia, UAE)</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">Gulf Multi-Alignment as Strategic Doctrine &mdash; Inside BRICS, Inside US Security Umbrella</div>
+      <div class="card-summary">Saudi Arabia and UAE exemplify &ldquo;Global South 2.0&rdquo;: maintaining US security partnerships while deepening economic ties with China and participating in BRICS. With Iran&rsquo;s blockade threatening the Strait, Gulf capitals face a bind &mdash; they benefit from US naval protection but are exposed to Iranian retaliation. Intra-GCC rivalry (UAE vs. Saudi Arabia in Yemen) adds further complexity.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>The Gulf states have perfected a form of strategic promiscuity that is becoming a model across the Global South. Gulf sovereign wealth funds are being courted as pivotal actors in both the Western-led green finance architecture and the BRICS alternative. Their double-positioning gives them leverage, but also creates accountability gaps that neither bloc is equipped to manage.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--diplomacy)">Diplomacy</span>
+        <span class="theme-tag" style="background:var(--conflict)">Conflict</span>
+        <span class="theme-tag" style="background:var(--finance)">Finance</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://moderndiplomacy.eu/2026/05/14/global-south-2-0-why-emerging-powers-are-rejecting-western-alignment/" target="_blank">Modern Diplomacy</a> &middot; <a href="https://www.kba13.com/middle-east-2026-geopolitics-security-iran-gaza-gulf-global-power-rivalry/" target="_blank">KBA13 Insight</a></div>
+    </div>
+
+    <div class="intel-card" style="border-left-color:var(--finance)"
+         data-regions="africa" data-themes="finance climate">
+      <div class="card-top">
+        <span class="card-country">Sub-Saharan Africa</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">Africa&rsquo;s Debt Crisis Tightens the Climate Finance Trap</div>
+      <div class="card-summary">22 low-income African countries are in or at high risk of debt distress. Debt service has risen to 43% of budget revenue &mdash; up from 38% in 2023. Net capital flows to EMDEs have turned negative. The sovereign-bank nexus is growing fastest in Sub-Saharan Africa, where government debt problems can trigger banking crises.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>Countries paying 43% of revenue on debt service cannot simultaneously invest in adaptation infrastructure, transition off fossil fuels, and maintain social spending. The irony is structural: Africa holds 30% of the world&rsquo;s critical minerals &mdash; the raw material inputs for the very energy transition it cannot afford to finance for itself.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--finance)">Finance</span>
+        <span class="theme-tag" style="background:var(--climate)">Climate</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://www.brookings.edu/articles/africas-top-priorities-for-the-2026-world-bank-and-imf-spring-meetings/" target="_blank">Brookings</a> &middot; <a href="https://www.imf.org/en/publications/fandd/issues/2026/03/the-new-face-of-african-debt-amadou-sy" target="_blank">IMF F&amp;D</a> &middot; <a href="https://www.atlanticcouncil.org/blogs/econographics/africa-enters-2026-facing-a-debt-crisis-the-answer-lies-in-regional-solutions/" target="_blank">Atlantic Council</a></div>
+    </div>
+
+    <div class="intel-card" style="border-left-color:var(--indigenous)"
+         data-regions="latin-america africa south-asia southeast-asia pacific" data-themes="indigenous climate finance">
+      <div class="card-top">
+        <span class="card-country">Global &mdash; Indigenous Peoples</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">Less Than 1% of Global Climate Finance Reaches Indigenous Peoples &mdash; UNPFII Escalates</div>
+      <div class="card-summary">Between 2011 and 2020, Indigenous peoples and local communities received less than 1% of global climate finance despite managing at least 25% of carbon-capturing land globally. At UNPFII, advocates cited devastation from flooding and wildfires and called for direct access mechanisms. OHCHR opened a formal call for inputs on land demarcation and titling in 2026.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>The 1% figure is not just morally indefensible &mdash; it is strategically irrational. Indigenous-managed territories consistently show better biodiversity and forest outcomes than state or corporate-managed equivalents. The OHCHR titling call for inputs may be the procedural step toward binding frameworks worth tracking for COP31 and the CBD.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--indigenous)">Indigenous</span>
+        <span class="theme-tag" style="background:var(--climate)">Climate</span>
+        <span class="theme-tag" style="background:var(--finance)">Finance</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://www.nationalobserver.com/2026/05/12/news/indigenous-people-climate-change-funding" target="_blank">National Observer</a> &middot; <a href="https://www.ohchr.org/en/calls-for-input/2026/call-inputs-demarcation-registration-and-titling-indigenous-peoples-lands" target="_blank">OHCHR</a> &middot; <a href="https://www.hcn.org/articles/war-climate-change-and-ai-are-at-stake-at-the-2026-un-indigenous-forum/" target="_blank">High Country News</a></div>
+    </div>
+
+    <div class="intel-card" style="border-left-color:var(--diplomacy)"
+         data-regions="southeast-asia" data-themes="diplomacy conflict climate">
+      <div class="card-top">
+        <span class="card-country">SE Asia (Vietnam, Indonesia, Philippines)</span>
+        <span class="card-relevance rel-high">High</span>
+      </div>
+      <div class="card-hl">Iran War Accelerates SE Asia&rsquo;s Drift Toward China &mdash; US Alliance Reliability in Question</div>
+      <div class="card-summary">Foreign Policy (May 6) finds the Iran war is &ldquo;pushing Southeast Asia into China&rsquo;s arms,&rdquo; as fuel shortages and US strategic focus on the Gulf undermine US alliance credibility in the Pacific. Vietnam signed 32 agreements with China during To Lam&rsquo;s April visit, elevating strategic ties language. Indonesia&rsquo;s Prabowo faces domestic unrest. Philippines assumes ASEAN chairmanship as Duterte ICC trial proceeds.</div>
+      <div class="why-matters">
+        <div class="wm-label">Why it matters</div>
+        <p>SE Asia&rsquo;s energy transition trajectory &mdash; Vietnam&rsquo;s Just Energy Transition Partnership, Indonesia&rsquo;s coal phase-down &mdash; is heavily dependent on Western finance and technology. If US credibility erodes and China deepens economic footholds, the transition politics of the region become considerably more complex for anyone building coalitions around COP31.</p>
+      </div>
+      <div class="card-tags">
+        <span class="theme-tag" style="background:var(--diplomacy)">Diplomacy</span>
+        <span class="theme-tag" style="background:var(--conflict)">Conflict</span>
+        <span class="theme-tag" style="background:var(--climate)">Climate</span>
+      </div>
+      <div class="card-src">Sources: <a href="https://foreignpolicy.com/2026/05/06/iran-war-southeast-asia-philippines-vietnam-indonesia-china-united-states-geopolitics-economics/" target="_blank">Foreign Policy</a> &middot; <a href="https://www.iseas.edu.sg/wp-content/uploads/2026/03/State-of-Southeast-Asia-2026-Survey-Final.pdf" target="_blank">ISEAS Survey 2026</a></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REPORTS -->
+<section id="reports">
+  <div class="section-header">
+    <h2>Reports &amp; Briefings Worth Reading</h2>
+    <span class="count">7 items</span>
+  </div>
+
+  <div id="reports-grid">
+
+    <div class="report-card">
+      <div class="report-inst">WMO</div>
+      <div class="report-title">State of the Climate in Latin America and the Caribbean 2025</div>
+      <div class="report-insight">Launched May 18 from Brazil&rsquo;s Ministry of Agriculture. Documents &ldquo;hydrological whiplash,&rdquo; record heat, glacier retreat, and cyclone escalation. The primary scientific baseline for LAC climate diplomacy going into COP31.</div>
+      <div class="report-meta">
+        <span class="meta-tag">Latin America</span>
+        <span class="meta-tag">EN/ES/PT</span>
+        <span class="meta-tag">May 2026</span>
+        <a class="src-link" href="https://wmo.int/resources/publication-series/state-of-climate-latin-america-and-caribbean/state-of-climate-latin-america-and-caribbean-2025" target="_blank">&rarr; Read</a>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-inst">ISEAS &mdash; Yusof Ishak Institute</div>
+      <div class="report-title">State of Southeast Asia 2026 Survey Report</div>
+      <div class="report-insight">Annual survey of Southeast Asian policymakers and analysts. Tracks trust in great powers, strategic posture, and economic alignment. Critical baseline for reading the region&rsquo;s Iran-crisis response and ASEAN 2026 agenda.</div>
+      <div class="report-meta">
+        <span class="meta-tag">SE Asia</span>
+        <span class="meta-tag">English</span>
+        <span class="meta-tag">Mar 2026</span>
+        <a class="src-link" href="https://www.iseas.edu.sg/wp-content/uploads/2026/03/State-of-Southeast-Asia-2026-Survey-Final.pdf" target="_blank">&rarr; Read</a>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-inst">IMF &mdash; Finance &amp; Development</div>
+      <div class="report-title">The New Face of African Debt (Amadou Sy)</div>
+      <div class="report-insight">Analyzes Africa&rsquo;s debt landscape, the sovereign-bank nexus, and the structural factors producing 22 countries at high/in distress. Essential background for MDB reform, debt relief, and climate finance architecture in Africa.</div>
+      <div class="report-meta">
+        <span class="meta-tag">Africa</span>
+        <span class="meta-tag">English</span>
+        <span class="meta-tag">Mar 2026</span>
+        <a class="src-link" href="https://www.imf.org/en/publications/fandd/issues/2026/03/the-new-face-of-african-debt-amadou-sy" target="_blank">&rarr; Read</a>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-inst">The Diplomat</div>
+      <div class="report-title">The BRICS Climate Stress Test: India&rsquo;s Opportunity to Reshape Global Climate Finance Architecture</div>
+      <div class="report-insight">May 2026. Maps the tension between India&rsquo;s climate finance ambitions under BRICS chairmanship and the political constraints imposed by the Iran war, energy dependency, and internal BRICS divergence. Directly relevant to CECG&rsquo;s climate diplomacy work.</div>
+      <div class="report-meta">
+        <span class="meta-tag">Global South</span>
+        <span class="meta-tag">English</span>
+        <span class="meta-tag">May 2026</span>
+        <a class="src-link" href="https://thediplomat.com/2026/05/the-brics-climate-stress-test-indias-opportunity-to-reshape-global-climate-finance-architecture/" target="_blank">&rarr; Read</a>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-inst">Africa Is a Country</div>
+      <div class="report-title">The New Scramble for Congo</div>
+      <div class="report-insight">May 2026. Sharp political analysis of the DRC&rsquo;s cobalt sovereignty moves in historical context &mdash; connecting audit regime, export quotas, and mining title revocations to the longer arc of extraction and exploitation. Contrasts official framing with grassroots reality.</div>
+      <div class="report-meta">
+        <span class="meta-tag">Africa</span>
+        <span class="meta-tag">English</span>
+        <span class="meta-tag">May 2026</span>
+        <a class="src-link" href="https://africasacountry.com/2026/05/the-new-scramble-for-congo" target="_blank">&rarr; Read</a>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-inst">Carnegie Endowment for International Peace</div>
+      <div class="report-title">South-South AI Collaboration: Advancing Practical Pathways</div>
+      <div class="report-insight">Feb 2026. Proposes three pathways for Global South AI cooperation: national initiative anchoring, sustained cooperation practice spaces, and pooled financing for shared compute infrastructure. Relevant to BRICS AI governance and the digital sovereignty debate.</div>
+      <div class="report-meta">
+        <span class="meta-tag">Global South</span>
+        <span class="meta-tag">English</span>
+        <span class="meta-tag">Feb 2026</span>
+        <a class="src-link" href="https://carnegieendowment.org/research/2026/02/south-south-ai-collaboration-advancing-practical-pathways" target="_blank">&rarr; Read</a>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-inst">Lowy Institute</div>
+      <div class="report-title">The Pacific Is Where Climate Leadership Will Be Made &mdash; or Lost</div>
+      <div class="report-insight">Sets up the political stakes for COP31 in Australia. Argues Pacific Island states&rsquo; proximity to the host gives them unique leverage, and how Australia performs will define climate leadership credibility for the entire Indo-Pacific. Essential reading pre-COP31.</div>
+      <div class="report-meta">
+        <span class="meta-tag">Pacific</span>
+        <span class="meta-tag">English</span>
+        <span class="meta-tag">2026</span>
+        <a class="src-link" href="https://www.lowyinstitute.org/the-interpreter/pacific-where-climate-leadership-will-be-made-or-lost" target="_blank">&rarr; Read</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STRATEGIC PATTERNS -->
+<section id="patterns">
+  <div class="section-header">
+    <h2>Emerging Strategic Patterns</h2>
+    <span class="count">6 patterns</span>
+  </div>
+
+  <div id="patterns-grid">
+
+    <div class="pattern-block">
+      <div class="pattern-num">1</div>
+      <div class="pattern-label">Cross-Regional &middot; Conflict &times; Finance</div>
+      <div class="pattern-title">The Hormuz Multiplier: One Chokepoint, Four Regions in Crisis</div>
+      <div class="pattern-body">The Strait of Hormuz is not a Middle East story &mdash; it is a Global South story. Its closure has simultaneously impoverished Bangladesh, accelerated Vietnam&rsquo;s pivot to China, strained India&rsquo;s diplomatic bandwidth as BRICS chair, and driven Gulf states deeper into multi-alignment. The structural lesson: a single node in the global energy system can unravel climate finance, geopolitical alignments, and development trajectories across the entire Global South simultaneously.</div>
+      <div class="country-chips">
+        <span class="country-chip">Iran</span><span class="country-chip">Bangladesh</span><span class="country-chip">India</span><span class="country-chip">Vietnam</span><span class="country-chip">Pakistan</span><span class="country-chip">Saudi Arabia</span>
+      </div>
+    </div>
+
+    <div class="pattern-block">
+      <div class="pattern-num">2</div>
+      <div class="pattern-label">Africa &middot; Minerals &times; Sovereignty</div>
+      <div class="pattern-title">Resource Sovereignty Is No Longer Rhetorical &mdash; DRC and Zambia Show the Architecture</div>
+      <div class="pattern-body">DRC&rsquo;s cobalt governance offensive and Zambia&rsquo;s local-sourcing legislation represent a qualitative shift: Global South resource states are building enforcement mechanisms, not just making declarations. DRC&rsquo;s quotas at half 2024 output, combined with 90 revoked mining titles, demonstrate that &ldquo;mineral sovereignty&rdquo; can now bite. The $16T revenue opportunity projected for African minerals over 25 years depends entirely on whether this institutional architecture can withstand capital flight and external pressure.</div>
+      <div class="country-chips">
+        <span class="country-chip">DRC</span><span class="country-chip">Zambia</span><span class="country-chip">Zimbabwe</span><span class="country-chip">Namibia</span>
+      </div>
+    </div>
+
+    <div class="pattern-block">
+      <div class="pattern-num">3</div>
+      <div class="pattern-label">Global &middot; Diplomacy &times; Alignment</div>
+      <div class="pattern-title">Strategic Autonomy as Default &mdash; Non-Alignment 2.0 Is Mainstream</div>
+      <div class="pattern-body">From Gulf states inside both BRICS and the US security umbrella, to Vietnam deepening China ties while maintaining US partnerships, to India chairing BRICS while relying on Gulf oil protected by US carriers &mdash; the Global South has normalized simultaneous, non-exclusive alignment. States are not moving away from the West; they are extracting maximum leverage from all blocs simultaneously. For international cooperation, this creates fundamentally different negotiating dynamics than Cold War-era non-alignment.</div>
+      <div class="country-chips">
+        <span class="country-chip">India</span><span class="country-chip">Saudi Arabia</span><span class="country-chip">UAE</span><span class="country-chip">Vietnam</span><span class="country-chip">Indonesia</span><span class="country-chip">Brazil</span>
+      </div>
+    </div>
+
+    <div class="pattern-block">
+      <div class="pattern-num">4</div>
+      <div class="pattern-label">Global &middot; Climate &times; Finance</div>
+      <div class="pattern-title">Climate Finance Architecture Fight Has Moved From Pledge to Plumbing</div>
+      <div class="pattern-body">The political debate has shifted from &ldquo;how much&rdquo; to &ldquo;who controls the pipes.&rdquo; The Pacific Resilience Facility entering force, the OHCHR land titling call, the Tropical Forests Facility&rsquo;s 20% direct flow to Indigenous peoples, and the BRICS Framework Declaration all represent fights over institutional architecture &mdash; who decides, who disburses, who audits. The $4T annual SDG financing gap widening while net capital flows to EMDEs turn negative suggests the current architecture is not just underfunded; it is structurally broken.</div>
+      <div class="country-chips">
+        <span class="country-chip">BRICS (11)</span><span class="country-chip">Pacific Islands</span><span class="country-chip">Africa (22)</span><span class="country-chip">Bangladesh</span>
+      </div>
+    </div>
+
+    <div class="pattern-block">
+      <div class="pattern-num">5</div>
+      <div class="pattern-label">Brazil &middot; Climate &times; Elections</div>
+      <div class="pattern-title">The Brazil 2026 Election Is a Climate Election &mdash; With Global Consequences</div>
+      <div class="pattern-body">Brazil&rsquo;s Amazon trajectory is directly tied to who wins the 2026 presidential election. The juxtaposition of record-low deforestation and rising electoral pressure from the agricultural bloc captures the tension: Lula&rsquo;s climate success is real but institutionally fragile. A more agriculture-friendly Congress, or a Bolsonaro-adjacent successor, could unwind a decade of progress. The Amazon is not only a Brazilian political asset &mdash; it is the single most consequential piece of climate infrastructure on the planet outside the atmosphere itself.</div>
+      <div class="country-chips">
+        <span class="country-chip">Brazil</span><span class="country-chip">Amazon Basin states</span>
+      </div>
+    </div>
+
+    <div class="pattern-block">
+      <div class="pattern-num">6</div>
+      <div class="pattern-label">Global South &middot; Tech &times; Power</div>
+      <div class="pattern-title">AI Sovereignty Is the New Terrain of North-South Power Asymmetry</div>
+      <div class="pattern-body">The framing shift from &ldquo;digital divide&rdquo; to &ldquo;data colonialism&rdquo; is politically significant. India, Brazil, and South Africa are building state-funded foundational AI models as acts of sovereign capability, not just policy. Carnegie&rsquo;s South-South AI collaboration framework and the India AI Impact Summit&rsquo;s &ldquo;shared compute&rdquo; proposals represent the beginning of a Global South institutional AI architecture. The risk: without enforcement mechanisms, digital sovereignty remains rhetorical &mdash; just as resource sovereignty did before the DRC model.</div>
+      <div class="country-chips">
+        <span class="country-chip">India</span><span class="country-chip">Brazil</span><span class="country-chip">South Africa</span><span class="country-chip">Kenya (Lelapa AI)</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOURCE ARCHIVE -->
+<section id="sources">
+  <div class="section-header">
+    <h2>Source Archive</h2>
+    <span class="count">Scan May 24&ndash;26, 2026</span>
+  </div>
+
+  <div id="sources-grid">
+
+    <div class="source-group-card">
+      <div class="source-group-title">Latin America</div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.washingtontimes.com/news/2026/may/25/government-brazil-commits-6175m-amazon-ecological-investment/" target="_blank">Washington Times &mdash; Brazil Eco Invest</a></div>
+        <div class="source-meta-col"><div class="source-date">May 25</div><div class="source-type">News</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.washingtonpost.com/world/2026/05/08/brazil-amazon-rainforest-wildfires-el-nino/30770546-4ade-11f1-a119-857cd2bf4fd4_story.html" target="_blank">Washington Post &mdash; Amazon degradation</a></div>
+        <div class="source-meta-col"><div class="source-date">May 8</div><div class="source-type">News</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.envirolink.org/2026/05/14/brazilian-amazon-deforestation-hits-eight-year-low-while-florida-halts-sloth-imports-after-mass-deaths-todays-environmental-briefing-for-thu-may-14-2026/" target="_blank">EnviroLink &mdash; Amazon 8-year low</a></div>
+        <div class="source-meta-col"><div class="source-date">May 14</div><div class="source-type">Env.</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://wmo.int/resources/publication-series/state-of-climate-latin-america-and-caribbean/state-of-climate-latin-america-and-caribbean-2025" target="_blank">WMO &mdash; State of Climate LAC 2025</a></div>
+        <div class="source-meta-col"><div class="source-date">May 18</div><div class="source-type">Multilateral</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://news.mongabay.com/2025/12/the-amazon-in-2026-a-challenging-year-ahead-now-off-the-center-stage/" target="_blank">Mongabay &mdash; Amazon 2026 outlook</a></div>
+        <div class="source-meta-col"><div class="source-date">Dec 2025</div><div class="source-type">Investigative</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.americasquarterly.org/article/the-legacy-of-cop30-for-latin-america/" target="_blank">Americas Quarterly &mdash; COP30 legacy LAC</a></div>
+        <div class="source-meta-col"><div class="source-date">2026</div><div class="source-type">Analysis</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://poder360.com.br/poder-governo/governo-cria-programa-para-combater-crime-na-amazonia/" target="_blank">Poder360 &mdash; Territ&oacute;rio Seguro program</a></div>
+        <div class="source-meta-col"><div class="source-date">May 2026</div><div class="source-type">PT news</div></div>
+      </div>
+    </div>
+
+    <div class="source-group-card">
+      <div class="source-group-title">Africa</div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://africasacountry.com/2026/05/the-new-scramble-for-congo" target="_blank">Africa Is a Country &mdash; New Scramble for Congo</a></div>
+        <div class="source-meta-col"><div class="source-date">May 2026</div><div class="source-type">Analysis</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://discoveryalert.com.au/drc-copper-cobalt-export-revenues-probe-audit-2026-leakage/" target="_blank">Discovery Alert &mdash; DRC export audit</a></div>
+        <div class="source-meta-col"><div class="source-date">May 2026</div><div class="source-type">Sector</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.spglobal.com/energy/en/news-research/latest-news/metals/122225-commodties-2026-cobalt-supply-delays-from-drc-spark-uncertainty-in-asian-european-markets" target="_blank">S&amp;P Global &mdash; Cobalt supply delays</a></div>
+        <div class="source-meta-col"><div class="source-date">Dec 2025</div><div class="source-type">Markets</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.imf.org/en/publications/fandd/issues/2026/03/the-new-face-of-african-debt-amadou-sy" target="_blank">IMF F&amp;D &mdash; New Face of African Debt</a></div>
+        <div class="source-meta-col"><div class="source-date">Mar 2026</div><div class="source-type">Multilateral</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.brookings.edu/articles/africas-top-priorities-for-the-2026-world-bank-and-imf-spring-meetings/" target="_blank">Brookings &mdash; Africa&rsquo;s IMF/WB priorities</a></div>
+        <div class="source-meta-col"><div class="source-date">2026</div><div class="source-type">Think Tank</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.atlanticcouncil.org/blogs/econographics/africa-enters-2026-facing-a-debt-crisis-the-answer-lies-in-regional-solutions/" target="_blank">Atlantic Council &mdash; Africa debt crisis</a></div>
+        <div class="source-meta-col"><div class="source-date">Jan 2026</div><div class="source-type">Think Tank</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.cnbcafrica.com/2026/world-banks-miga-to-more-than-double-africa-guarantees-to-6-4-billion-a-year" target="_blank">CNBC Africa &mdash; MIGA doubles guarantees</a></div>
+        <div class="source-meta-col"><div class="source-date">2026</div><div class="source-type">Finance</div></div>
+      </div>
+    </div>
+
+    <div class="source-group-card">
+      <div class="source-group-title">MENA &amp; South Asia</div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis" target="_blank">Wikipedia &mdash; 2026 Hormuz Crisis</a></div>
+        <div class="source-meta-col"><div class="source-date">Live</div><div class="source-type">Reference</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.britannica.com/event/2026-Iran-war" target="_blank">Britannica &mdash; 2026 Iran War</a></div>
+        <div class="source-meta-col"><div class="source-date">Live</div><div class="source-type">Reference</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://commonslibrary.parliament.uk/research-briefings/cbp-10636/" target="_blank">House of Commons Library &mdash; Hormuz briefing</a></div>
+        <div class="source-meta-col"><div class="source-date">2026</div><div class="source-type">Policy</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.dallasfed.org/research/economics/2026/0320" target="_blank">Dallas Fed &mdash; Hormuz economic impact</a></div>
+        <div class="source-meta-col"><div class="source-date">Mar 2026</div><div class="source-type">Research</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://news.mongabay.com/short-article/2026/05/climate-change-triples-chance-of-deadly-2026-south-asia-pre-monsoon-heatwave-report/" target="_blank">Mongabay &mdash; South Asia heatwave attribution</a></div>
+        <div class="source-meta-col"><div class="source-date">May 2026</div><div class="source-type">Science</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://thediplomat.com/2026/05/lesson-from-the-may-2025-india-pakistan-crisis-no-space-for-limited-war/" target="_blank">The Diplomat &mdash; India-Pakistan lessons</a></div>
+        <div class="source-meta-col"><div class="source-date">May 2026</div><div class="source-type">Analysis</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.kba13.com/middle-east-2026-geopolitics-security-iran-gaza-gulf-global-power-rivalry/" target="_blank">KBA13 &mdash; ME geopolitics security 2026</a></div>
+        <div class="source-meta-col"><div class="source-date">2026</div><div class="source-type">Analysis</div></div>
+      </div>
+    </div>
+
+    <div class="source-group-card">
+      <div class="source-group-title">SE Asia, Pacific &amp; Global</div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://foreignpolicy.com/2026/05/06/iran-war-southeast-asia-philippines-vietnam-indonesia-china-united-states-geopolitics-economics/" target="_blank">Foreign Policy &mdash; Iran war &amp; SE Asia</a></div>
+        <div class="source-meta-col"><div class="source-date">May 6</div><div class="source-type">Analysis</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.iseas.edu.sg/wp-content/uploads/2026/03/State-of-Southeast-Asia-2026-Survey-Final.pdf" target="_blank">ISEAS &mdash; State of SE Asia 2026</a></div>
+        <div class="source-meta-col"><div class="source-date">Mar 2026</div><div class="source-type">Think Tank</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://pina.com.fj/2026/05/26/pacific-leaders-push-climate-justice-and-sea-level-rise-action/" target="_blank">PINA &mdash; Pacific Climate Justice Week</a></div>
+        <div class="source-meta-col"><div class="source-date">May 26</div><div class="source-type">Regional</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.lowyinstitute.org/the-interpreter/pacific-where-climate-leadership-will-be-made-or-lost" target="_blank">Lowy Institute &mdash; Pacific &amp; COP31</a></div>
+        <div class="source-meta-col"><div class="source-date">2026</div><div class="source-type">Think Tank</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.nationalobserver.com/2026/05/12/news/indigenous-people-climate-change-funding" target="_blank">National Observer &mdash; Indigenous climate finance</a></div>
+        <div class="source-meta-col"><div class="source-date">May 12</div><div class="source-type">News</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://moderndiplomacy.eu/2026/05/14/global-south-2-0-why-emerging-powers-are-rejecting-western-alignment/" target="_blank">Modern Diplomacy &mdash; Global South 2.0</a></div>
+        <div class="source-meta-col"><div class="source-date">May 14</div><div class="source-type">Analysis</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://carnegieendowment.org/research/2026/02/south-south-ai-collaboration-advancing-practical-pathways" target="_blank">Carnegie &mdash; South-South AI</a></div>
+        <div class="source-meta-col"><div class="source-date">Feb 2026</div><div class="source-type">Think Tank</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.aljazeera.com/news/2026/5/14/iran-war-why-the-brics-foreign-ministers-meeting-in-india-matters" target="_blank">Al Jazeera &mdash; BRICS FM meeting &amp; Iran</a></div>
+        <div class="source-meta-col"><div class="source-date">May 14</div><div class="source-type">News</div></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.ohchr.org/en/calls-for-input/2026/call-inputs-demarcation-registration-and-titling-indigenous-peoples-lands" target="_blank">OHCHR &mdash; Indigenous land titling call</a></div>
+        <div class="source-meta-col"><div class="source-date">2026</div><div class="source-type">UN</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Global South Pulse</div>
+  <div style="margin-top:6px;">Automated intelligence scan &middot; May 24&ndash;26, 2026 &middot; 18 signals &middot; 9 cards &middot; 24 countries &middot; 7 reports &middot; 6 patterns</div>
+  <div style="margin-top:4px; font-size:9px; opacity:0.6;">Generated for Diego Casaes, CECG / Hourglass &middot; All analysis is draft intelligence, not a published position</div>
+</footer>
+
+</main>
+
+<script>
+  function navTo(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var offset = 80;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+    var btn = document.querySelector('.nav-btn[onclick="navTo(\'' + id + '\')"]');
+    if (btn) btn.classList.add('active');
+  }
+
+  function filterCards(filter, btn) {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.intel-card').forEach(function(card) {
+      if (filter === 'all') { card.classList.remove('hidden'); return; }
+      var regions = (card.dataset.regions || '').split(' ');
+      var themes = (card.dataset.themes || '').split(' ');
+      var match = regions.indexOf(filter) >= 0 || themes.indexOf(filter) >= 0;
+      if (match) { card.classList.remove('hidden'); } else { card.classList.add('hidden'); }
+    });
+  }
+
+  var sections = ['overview','intelligence','reports','patterns','sources'];
+  window.addEventListener('scroll', function() {
+    var offset = 100;
+    var current = 'overview';
+    sections.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < offset) { current = id; }
+    });
+    document.querySelectorAll('.nav-btn').forEach(function(b) {
+      var m = b.getAttribute('onclick').match(/'([^']+)'/);
+      if (m) { b.classList.toggle('active', m[1] === current); }
+    });
+  }, { passive: true });
+</script>
+
+</body>
+</html>
