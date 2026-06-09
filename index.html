@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global South Geopolitical Pulse — Archive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f2ead8;
+    --panel: rgba(255,252,244,0.96);
+    --text: #2c1f0e;
+    --text-muted: #7a6248;
+    --accent: #7a4a1e;
+    --border: rgba(122,74,30,0.18);
+    --font: 'SF Mono', 'Fira Code', 'Fira Mono', 'Cascadia Code', monospace;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 44px;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 12px;
+    z-index: 100;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .topbar-brand { font-size: 14px; font-weight: 800; letter-spacing: 0.08em; }
+  .topbar-sep { opacity: 0.4; }
+  .topbar-sub { font-weight: 400; opacity: 0.85; font-size: 12px; }
+
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 24px 60px;
+  }
+
+  .hero {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero h1 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .hero p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .edition-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .edition-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .edition-card:hover {
+    border-left-color: #b02828;
+    box-shadow: 0 2px 12px rgba(122,74,30,0.12);
+  }
+
+  .edition-card:hover .arrow { opacity: 1; }
+
+  .edition-meta { display: flex; flex-direction: column; gap: 4px; }
+
+  .edition-date {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+  }
+
+  .edition-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .latest-badge {
+    font-size: 10px;
+    font-weight: 700;
+    background: #b02828;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
+
+  .arrow {
+    font-size: 18px;
+    color: var(--accent);
+    opacity: 0.4;
+    transition: opacity 0.15s;
+  }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">GLOBAL SOUTH PULSE</span>
+  <span class="topbar-sep">|</span>
+  <span class="topbar-sub">Intelligence Archive</span>
+</div>
+
+<div class="main">
+  <div class="hero">
+    <h1>Global South Geopolitical Pulse</h1>
+    <p>A biweekly intelligence scan tracking geopolitical shifts affecting climate, nature, and development across the Global South. Each edition covers the previous 48–72 hours of signals, organized by region and theme.</p>
+  </div>
+
+  <div class="edition-list" id="editions">
+
+    <a class="edition-card" href="editions/2026-06-09.html">
+      <div class="edition-meta">
+        <div class="edition-date">June 6–9, 2026 <span class="latest-badge">Latest</span></div>
+        <div class="edition-label">Edition #4 — Global South Geopolitical Pulse</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="edition-card" href="editions/2026-06-05.html">
+      <div class="edition-meta">
+        <div class="edition-date">June 2–5, 2026</div>
+        <div class="edition-label">Edition #3 — Global South Geopolitical Pulse</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="edition-card" href="editions/2026-06-02.html">
+      <div class="edition-meta">
+        <div class="edition-date">May 31 – June 2, 2026</div>
+        <div class="edition-label">Edition #2 — Global South Geopolitical Pulse</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="edition-card" href="editions/2026-05-24.html">
+      <div class="edition-meta">
+        <div class="edition-date">May 24–26, 2026</div>
+        <div class="edition-label">Edition #1 — Global South Geopolitical Pulse</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    <span>Global South Geopolitical Pulse · Hourglass</span>
+    <span>Updated every 48h</span>
+  </div>
+</div>
+
+</body>
+</html>
